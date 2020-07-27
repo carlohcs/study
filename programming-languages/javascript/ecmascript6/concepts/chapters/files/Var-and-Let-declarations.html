@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Var and Let declarations</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <!-- Necessary to run ECS6 -->
+        <script type="text/babel">
+
+            // Var and Let declarations
+            function me ( condition ) { 
+
+                var me = "Carlos"; 
+
+                if ( condition ) { 
+                    let me = "Carlos Henrique"; 
+                }
+
+                return me; 
+            }
+
+            // Outputs: Carlos
+            console.log( me() );
+
+            // Outputs: Carlos
+            console.log( me( true ) );
+
+            // Another example
+            for ( var i = 0; i < 5; i++ ) { console.log( i ); }
+
+            // Outputs: 5
+            console.log( i );
+
+            for ( let j = 0; j < 5; j++ ) { console.log( j ); }
+
+            // Outputs: ReferenceError: j is not defined
+            console.log( j );
+
+        </script>
+    </body>
+</html>

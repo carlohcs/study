@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>MDN example</title>
+  <meta charset="utf-8"  />
+</head>
+  <body>
+
+    <button id="btn" type="button">Make a promise!</button>
+
+    <div id="log">
+    </div>
+
+    <script>
+    (function(root){
+
+      var
+        promiseCount = 0,
+        button = document.getElementById('btn');
+
+      function testPromise() {
+        var
+          thisPromiseCount = ++promiseCount,
+          log = document.getElementById('log'),
+          p1;
+
+        log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Started <small>Sync code started</small><br />');
+
+        p1 = new Promise(
+          function(resolve, reject) {
+            log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Promise started (<small>Async code started</small>)<br />');
+
+            window.setTimeout(function() {
+              resolve(thisPromiseCount);
+            }, Math.random() * 2000 + 1000);
+          });
+
+        p1.then(function(val) {
+          log.insertAdjacentHTML('beforeend', val + ') Promise made (<small>Sync code terminated</small>)<br />');
+        });
+      }
+
+      button.onclick = testPromise;
+
+    })(this);
+
+    </script>
+  </body>
+</html>

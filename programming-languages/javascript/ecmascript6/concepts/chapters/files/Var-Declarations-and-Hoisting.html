@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Var declarations and hoisting</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+            // Var Declarations and Hoisting
+            function me ( condition ) {
+
+                if ( condition ) {
+                    me = "Carlos";
+                }
+
+                // What is the return of this?
+                console.log( me );
+
+                var me;
+            }
+
+            // Outputs: undefined
+            me();
+
+            // Outputs: Carlos
+            me( true );
+
+            // Another example
+            function x ( ) {
+
+                x = 1;
+                console.log( "Value of x -> " + x );
+                var x;
+
+            }
+
+            // Outputs: "Value of x -> 1"
+            x();
+
+        </script>
+    </body>
+</html>

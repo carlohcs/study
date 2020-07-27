@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Function spread operator</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          // Just with two parameters (Math.max just recognize two parameters)
+          let value1 = 25,
+              value2 = 50;
+
+          console.log( Math.max( value1, value2 ) );      // 50
+
+          console.log( "--------------------" );
+
+          // With a lot of values via method apply
+          let values = [ 25, 50, 75, 100 ];
+
+          console.log( Math.max.apply( Math, values ) ); // 100
+
+          console.log( "--------------------" );
+
+          // With a lot of values via ... spread operator
+          let values2Way = [ 25, 50, 75, 100 ];
+
+          console.log( Math.max( ...values2Way ) ); // 100
+
+        </script>
+    </body>
+</html>

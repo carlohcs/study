@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Let in function loops</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          // 1º Exampĺe
+          var funcs = [];
+
+          for (let i=0; i < 10; i++) {
+              funcs.push(function() {
+                  console.log(i);
+              });
+          }
+
+          funcs.forEach(function(func) {
+              func();     // outputs 0, then 1, then 2, up to 9
+          });
+
+          // 2º Example
+          var funcs = [],
+              object = {
+                  a: true,
+                  b: true,
+                  c: true
+              };
+
+          for (let key in object) {
+              funcs.push(function() {
+                  console.log(key);
+              });
+          }
+
+          funcs.forEach(function(func) {
+              func();     // outputs "a", then "b", then "c"
+          });
+
+
+        </script>
+    </body>
+</html>

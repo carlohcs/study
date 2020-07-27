@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo Application</title>
+  <link rel="stylesheet" type="text/css" href="./src/vendors/foundation-5.3/css/foundation.min.css" />
+  <link rel="stylesheet" type="text/css" href="./src/vendors/foundation-notify/css/foundation-notify.css" />
+  <link rel="stylesheet" type="text/css" href="./src/css/base.css" />
+</head>
+
+<body>
+
+  <!-- The application's container -->
+  <section id="todo-app">
+    <div class="row container">
+      <div class="large-8 large-offset-2 columns">
+        <header id="header">
+          <h1 class="text-center">todos</h1>
+        </header>
+        <section id="main">
+          <h2 class="text-center subheader">What needs to be done?</h2>
+          <div class="row">
+            <div class="columns">
+              <ul id="todo-list" class="no-bullet">
+                <li class="todo-item">
+                  <!--<span class="check"><input type="checkbox" /></span>-->
+                  <span class="check"><i class="fi-check"></i></span>
+                  <span class="destroy right"><i class="fi-x"></i></span>
+                  <label> Lorem ipsum dolor sit amet, consectetur.</label>
+                  <input class="edit" value="{{title}}" />
+                </li>
+                <li class="todo-item closed">
+                  <!--<span class="check"><input type="checkbox" /></span>-->
+                  <span class="check"><i class="fi-check"></i></span>
+                  <span class="destroy right"><i class="fi-x"></i></span>
+                  <label> Lorem ipsum dolor sit amet, consectetur.</label>
+                  <input class="edit" value="{{title}}" />
+                </li>
+                <li class="todo-item active">
+                  <span class="check"><input type="checkbox" /></span>
+                  <span class="destroy right"><i class="fi-x"></i></span>
+                  <label> Lorem ipsum dolor sit amet, consectetur.</label>
+                  <input class="edit" value="{{title}}" />
+                </li>
+              </ul>
+              <div id="status">
+                <div class="row">
+                  <div class="large-3 columns">
+                    <span>1 task left</span>
+                  </div>
+                  <div class="large-6 columns text-center">
+                    <a href="">all</a>
+                    <a href="">completed</a>
+                    <a href="">uncompleted</a>
+                  </div>
+                  <div class="large-3 columns text-right">
+                    <a href="">mark all as completed</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer id="footer">
+          <div id="info">
+            <p class="text-center">
+              Double click to edit a todo
+            </p>
+            <p class="text-center">
+              Written by <a href="http://www.github.com/carlohcs">@carlohcs</a> - 2016
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+
+  <!--<div class="notifications top-right"></div>
+  <div class="notifications top-left"></div>
+  <div class="notifications bottom-left"></div>
+  <div class="notifications top-center"></div>
+  -->
+  <div class="notifications bottom-right"></div>
+
+  <!--<div style="" data-alert="" class="alert-box in fade"><a href="#" class="close">×</a>Look, a distraction!</div>-->
+
+  <!-- Backbone.js - Underscore.js - Handlebars.js -->
+  <script src="./src/js/application.js"></script>
+  <script src="./src/js/app.js"></script>
+  <script src="./src/vendors/foundation-5.3/js/foundation.min.js"></script>
+  <script src="./src/vendors/foundation-notify/js/foundation-notify.js"></script>
+  <script>
+/*    (function() {
+
+      $(document).foundation();
+
+      jQuery(document).foundation();
+
+	var appearances = ['', 'success', 'warning', 'info', 'alert', 'secondary'];
+	//var positions = [/*'top-left', */'top-right', 'bottom-left', 'bottom-right']; // top-left disabled for UI reasons
+	var positions = 'bottom-right'; // top-left disabled for UI reasons
+	// from http://www.thetoptens.com/random-sentences/
+	var messages = [
+		'I am so blue I\'m greener than purple',
+		'Banana error.',
+		'I stepped on a Corn Flake, now I\'m a Cereal Killer',
+		'Llamas eat sexy paper clips',
+		'Look, a distraction!',
+		'What do you think about the magical yellow unicorn who dances on the rainbow with a spoonful of blue cheese dressing?',
+		'A hotdog on a bridge',
+		'My nose is a communist.',
+		'My world is where everybody is a pony and we all eat rainbows and poop butterflies',
+		'Everyday a grape licks a friendly cow',
+		'When life gives you lemons, chuck them at people you hate',
+		'No sheep is quite as crooked as a bed',
+		'On a scale from one to ten what is your favourite colour of the alphabet.',
+		'Are you a fan of delicious flavor?',
+		'Thank you for noticing this notice, your noticing has been noticed',
+		'Nom nom nom nom nom!',
+		'I like pie'
+	];
+
+		var message = messages[Math.floor(Math.random() * messages.length)];
+		var position = positions;
+		var appearance = appearances[Math.floor(Math.random() * appearances.length)];
+
+		jQuery('.' + position).notify({
+			message: {
+				text: message
+			},
+			fadeOut: {
+				enabled: true,
+				delay: 300000
+			},
+			type: appearance
+		}).show();
+
+
+  })();*/
+  </script>
+</body>
+
+</html>

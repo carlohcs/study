@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Functions ES5 Default parameters</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          // Without type check
+          function makeRequest( url, timeout, callback ) {
+
+            timeout = timeout || 2000;
+            callback = callback || function() {};
+
+            //console.log( "timeout -> ", timeout );
+            //console.log( "callback -> ", callback );
+
+            // ...
+
+            return {
+              timeout: timeout,
+              callback: callback
+            };
+
+          }
+
+          // Tests
+
+          // It's pass
+          // Be return
+          // timeout: 1000
+          // callback: 'function'
+          console.log( makeRequest( 'http://something.com', 1000, function(){ alert("Hi!"); } ).timeout === 1000 );
+          console.log( typeof makeRequest( 'http://something.com', 1000, function(){ alert("Hi!"); } ).callback === 'function' );
+
+          console.log('---------------');
+
+          // It will not pass
+          // Be return
+          // timeout: 0
+          // callback: 0
+          console.log( makeRequest( 'http://something.com', 0, 0 ).timeout === 0 );
+          console.log( typeof makeRequest( 'http://something.com', 0, 0 ).callback === 0 );
+
+          // Here demonstrate that functions returned default parameters
+          //console.log( makeRequest( 'http://something.com', 0, 0 ).timeout === 2000 );
+          //console.log( typeof makeRequest( 'http://something.com', 0, 0 ).callback === 'function' );
+
+        </script>
+    </body>
+</html>

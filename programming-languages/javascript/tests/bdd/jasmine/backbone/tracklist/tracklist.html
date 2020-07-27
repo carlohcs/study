@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <style>
+    .favourited {
+      background: #000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="./../application.js"></script>
+  <script src="./../templates.js"></script>
+  <script src="./../app.js"></script>
+  <script src="./View.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      var
+        tracklist = new app.Tracklist();
+        tracklist.render();
+    })();
+  </script>
+</body>
+</html>

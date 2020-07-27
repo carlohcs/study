@@ -1,0 +1,33 @@
+<!doctype html>
+<html language="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Title</title>
+</head>
+<body>
+
+  <script src="../examples/assets/underscore.min.js"></script>
+  <script src="../examples/assets/jquery.min.js"></script>
+  <script src="../examples/assets/backbone.min.js"></script>
+
+  <script>
+    var Todo = Backbone.Model.extend({
+      defaults: {
+        title: 'Default title'
+      },
+      initialize: function() {
+          console.log('This model has been initialized.');
+          this.on('change', function() {
+            console.log('Values for this model have changed.');
+          });
+      }
+    });
+
+    var todo = new Todo();
+
+    // Outputs: Values for this model have changed.
+    todo.set('title', 'New title!');
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+
+    "vim.useCtrlKeys": true,
+
+    "vim.hlsearch": true,
+
+    "vim.useSystemClipboard": true,
+
+    "vim.autoindent": true,
+
+    "vim.ignorecase": true
+}

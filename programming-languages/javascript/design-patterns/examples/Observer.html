@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Observer Pattern</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>Click in the button and view the source code</h1>
+
+        <button id="addNewObserver">Add New Observer checkbox</button>
+        <input id="mainCheckbox" type="checkbox"/>
+        <div id="observersContainer"></div>
+
+        <script>
+
+            // ObserverList
+            // Provides an object that groups the list of observers that an issue may have
+            function ObserverList() {
+                this.observerList = [];
+            }
+
+            ObserverList.prototype.add = function( obj ) {
+                return this.observerList.push( obj );
+            };
+
+            ObserverList.prototype.count = function( obj ) {
+                return this.observerList.length;
+            };
+
+            ObserverList.prototype.get = function( index ) {
+                if( index > -1 && index < this.observerList.length ) {
+                    return this.observerList[ index ];
+                }
+            };
+
+            ObserverList.prototype.indexOf = function( obj, startIndex ) {
+                var i = startIndex;
+
+                while( i < this.observerList.length ) {
+                    if( this.observerList[i] === obj ) {
+                        return i;
+                    }
+                }
+
+                return -1;
+            };
+
+            ObserverList.prototype.removeAt = function( index ) {
+                this.observerList.slice( index, 1 );
+            };
+            
+            // Subject
+            // Add the ability to add, remove or notify observers on the observer list
+            function Subject() { 
+                this.observers = new ObserverList();
+            }
+
+            Subject.prototype.addObserver = function( observer ) {
+                this.observers.add( observer );
+            };
+
+            Subject.prototype.removeObserver = function( observer ) {
+                this.observers.removeAt( this.observers.indexOf( observer, 0 ) );
+            };
+
+            Subject.prototype.notify = function( context ) {
+                var observerCount = this.observers.count();
+                for( var i = 0; i < observerCount; i++ ) {
+                    this.observers.get( i ).update( context );
+                }
+            };
+
+            // The Observer 
+            function Observer() {
+                this.update = function( value ) {
+                    this.checked = value;
+                };
+            }
+
+            // Helper function
+            // Extends legacy from a object to another object
+            function extend( obj, extension ) {
+
+                for( var key in extension ) {
+                    obj[ key ] = extension[ key ];
+                }
+
+            }
+
+            // References to our DOM elements
+            var controlCheckbox = document.getElementById( "mainCheckbox" ),
+                addBtn = document.getElementById( "addNewObserver" ),
+                container = document.getElementById( "observersContainer" );
+            
+            // Extend methods and properties to checkbox from Subject class
+            extend( controlCheckbox, new Subject() );
+
+            controlCheckbox.onclick = function() {
+                this.notify( this.checked );
+            };
+
+            function addNewObserver() {
+
+                var check = document.createElement( "input" );
+                    check.type = "checkbox";
+
+                // Extend methods and properties to checkbox from Observer class
+                extend( check, new Observer() );
+
+                // If is necessary to subscribe the update methods
+                // check.update = function( value ) {
+
+                //     this.checked = value;
+
+                // };
+
+                controlCheckbox.addObserver( check );
+
+                container.appendChild( check );
+
+            }
+
+            addBtn.onclick = addNewObserver;
+
+        </script>
+    </body>
+</html>

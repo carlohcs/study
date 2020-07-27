@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Functions ES5 Default parameters fixed</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          function makeRequest( url, timeout = 2000, callback ) {
+
+              // the rest of the function
+
+              return {
+                timeout: timeout,
+                callback: callback
+              };
+
+          }
+
+          // Tests
+
+          // Be return
+          // timeout: 2000 (default parameter)
+          // callback: 'function'
+          console.log( makeRequest( 'http://something.com', undefined, function(body) {  } ).timeout === 2000 );
+          console.log( typeof makeRequest( 'http://something.com', undefined, function(){ alert("Hi!"); } ).callback === 'function' );
+
+          console.log('---------------');
+
+          // Be return
+          // timeout: null
+          console.log( makeRequest( 'http://something.com', null ).timeout === null );
+
+        </script>
+    </body>
+</html>

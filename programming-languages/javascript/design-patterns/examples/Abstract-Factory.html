@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Abstract Factory - Factory Pattern</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+            // Dependencies for this example
+            
+            // Type.js - Constructors used behind the scenes
+
+            // A constructor for defining new cars
+            function Car( options ) {
+                
+                // some defaults
+                this.doors = options.doors || 4;
+                this.state = options.state || "brand new";
+                this.color = options.color || "silver";
+
+            }
+
+            // Necessary to this example
+            Car.prototype.drive = true;
+            Car.prototype.breakDown = true;
+
+            // A constructor for defining new trucks
+            function Truck( options ) {
+                
+                // some defaults
+                this.state = options.state || "used";
+                this.wheelSize = options.wheelSize || "large";
+                this.color = options.color || "blue";
+
+            }
+
+            // Necessary to this example
+            Truck.prototype.drive = true;
+            Truck.prototype.breakDown = true;
+
+            // FactoryExample.js
+
+            // Define a skeleton vehicle factory
+            function VehicleFactory() {}
+
+            // Define the prototypes and utilities for this factory
+
+            // Our default vehicleClass is Car
+            VehicleFactory.prototype.vehicleClass = Car;
+
+            // Our Factory method for creating new Vehicle instances
+            VehicleFactory.prototype.createVehicle = function ( options ) {
+
+                switch( options.vehicleType ) {
+                    case "car":
+                        this.vehicleClass = Car;
+                        break;
+                    case "truck":
+                        this.vehicleClass = Truck;
+                        break;
+                    //defaults to VehicleFactory.prototype.vehicleClass (Car)
+                }
+                
+                return new this.vehicleClass( options );
+
+            };
+            // /Dependencies
+
+            var abstractVehicleFactory = (function() {
+
+            // Storage for our vehicle types
+            var types = {};
+
+            return {
+
+                getVehicle: function ( type, customizations ) {
+                    var Vehicle = types[ type ];
+
+                    return ( Vehicle ? new Vehicle( customizations ) : null );
+                },
+
+                registerVehicle: function ( type, Vehicle ) {
+                    var proto = Vehicle.prototype;
+
+                    // only register classes that fullfill the vehicle contract
+                    if ( proto.drive && proto.breakDown ) {
+                        types[ type ] = Vehicle;
+                    }
+
+                    return abstractVehicleFactory;
+                }
+
+            };
+
+        })();
+
+        // Usage
+
+        abstractVehicleFactory.registerVehicle( "car", Car );
+        abstractVehicleFactory.registerVehicle( "truck", Truck );
+
+        // Instantiate a new car based on the abstract vehicle type
+        var car = abstractVehicleFactory.getVehicle( "car", {
+            color: "kube green",
+            state: "like new"
+        });
+
+        // Outputs:
+        // Object { doors: 4, state: "like new", color: "kube green" }
+        console.log( car );
+
+        // Instantiate a new truck in a similar manner
+        var truck = abstractVehicleFactory.getVehicle( "truck", {
+            wheelSize: "medium",
+            color: "neon yellow"
+        });
+
+        // Outputs:
+        // Object { state: "used", wheelSize: "medium", color: "neon yellow" }
+        console.log( truck );
+
+
+        </script>
+    </body>
+</html>

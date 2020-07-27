@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Functions ES5 arguments</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+          // Default mode
+          function mixArgs(first, second) {
+              console.log(first === arguments[0]);
+              console.log(second === arguments[1]);
+              first = "c";
+              second = "d";
+              console.log(first === arguments[0]);
+              console.log(second === arguments[1]);
+          }
+
+          mixArgs("a", "b");
+
+          // Outputs:
+          // true
+          // true
+          // true
+          // true
+
+          console.log('---------------');
+
+          // Strict mode
+          function mixArgsStrict(first, second) {
+
+              "use strict";
+
+              console.log(first === arguments[0]);
+              console.log(second === arguments[1]);
+              first = "c";
+              second = "d";
+              console.log(first === arguments[0]);
+              console.log(second === arguments[1]);
+          }
+
+          mixArgsStrict("a", "b");
+
+          // Outputs:
+          // true
+          // true
+          // false
+          // false
+
+        </script>
+
+    </body>
+</html>

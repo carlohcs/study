@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Constructor Pattern</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+
+		<h1>See working in console</h1>
+
+		<script>
+
+			//Object Creation
+			var carCopy = {};
+
+			//1º Variation
+			//var carCopy = Object.create( Object.prototype );
+
+			//2º Variation
+			//var carCopy = new Object();
+
+			//Basic Constructors
+			function Car( name, model, price ) {
+
+				this.name = name;
+				this.model = model;
+				this.price = price;
+
+			}
+
+			//Constructors with Prototypes
+			Car.prototype.toString = function () {
+
+				console.log( "Car -> Name: ", this.name, " Model: ", this.model, " Price: ", this.price );
+
+			};
+			
+			//Uses
+			//See working in console
+			
+			//Basic Constructors
+			var ferrari = new Car( "Ferrari", "Turbo", 1000000 );
+			console.log( "Ferrari object -> ", ferrari );
+
+			//Constructors with Prototypes
+			ferrari.toString();
+			
+			//Object Creation
+			carCopy = Object.create( Car );
+			console.log( "Object with inherits from Car class -> ", carCopy );
+
+			carCopy.name = "Lamborgini";
+			carCopy.model = "Turbo";
+			carCopy.price = 1000000;
+			console.log( "Lamborgini(class copy) object -> ", carCopy );
+
+		</script>
+	</body>
+</html>

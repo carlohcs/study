@@ -1,0 +1,27 @@
+<!doctype html>
+<html language="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Title</title>
+</head>
+<body>
+
+  <script src="../examples/assets/underscore.min.js"></script>
+  <script src="../examples/assets/jquery.min.js"></script>
+  <script src="../examples/assets/backbone.min.js"></script>
+
+  <script>
+    var Todo = Backbone.Model.extend({
+      defaults: {
+          title: 'Todo tomorrow!'
+      }
+    });
+
+    var todo = new Todo({});
+
+    // Outputs: 'Todo title is: Todo tomorrow!''
+    console.log('Todo title is: ', todo.get('title'));
+  </script>
+
+</body>
+</html>

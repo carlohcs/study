@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Module Pattern</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+            var Counter = (function() {
+
+                //Private variable
+                var count = 0;    
+
+                //API return
+                return {
+
+                    increment: function () {
+
+                        count++;
+
+                    },
+                    reset: function () {
+
+                        count = 0;
+
+                    },
+                    getCounter: function () {
+
+                        return count;
+
+                    }
+
+                }
+
+            })();
+
+            //See in console
+            console.log( "Current value -> ", Counter.getCounter() );
+
+            //Methods available
+            Counter.increment();
+
+            //See in console
+            console.log( "Incremented value -> ", Counter.getCounter() );
+
+            Counter.reset();
+
+            //You can define a property with the same name of a private variable, but, it not is the variable
+            Counter.counter = 'Any value';
+
+            //See in console
+            console.log(Counter);
+
+            //See in console
+            console.log( "Current value -> ", Counter.getCounter() );
+
+        </script>
+    </body>
+</html>

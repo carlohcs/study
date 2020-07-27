@@ -1,0 +1,20 @@
+<div id="template">
+  <div class="tracklist-container">
+    <ul class="tracks">
+      {{#each tracks}}
+      <li class="track-list-item">
+        <p>
+          {{title}}
+        </p>
+        <p>
+          {{author}}
+        </p>
+        <div class="another-actions-container">
+          <button class="btn btn-primary heart">Heart</button>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+    <button class="btn btn-primary close">x</button>
+  </div>
+</div>

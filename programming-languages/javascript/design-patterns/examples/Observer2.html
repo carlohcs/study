@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Observer Pattern</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<script>
+
+			var Email = (function() { 
+
+				var list = [],
+					listeners = {};
+
+				return {
+
+					on: function ( eventName, listener ) {
+
+						if( ! listeners[ eventName ] ) listeners[ eventName ] = [];
+						listeners[ eventName ].push( listener );
+
+					},
+					dispatch: function( eventName ) {
+
+						if( listeners[ eventName ] ) {
+
+							for( var index = 0; index < listeners[ eventName ].length; index++ ) {
+
+								listeners[ eventName ][ index ]( this );
+
+							}
+
+						}
+					},
+					new: function ( message ) {
+
+						list.push({ name: name, message: message });
+						
+						this.dispatch( 'newMessage' );
+
+					}
+
+				};
+
+			})( );
+
+
+			Email.on( 'newMessage', function() {
+
+				//console.log("Name: ", this.name );
+				console.log(this);
+
+			});
+
+			Email.new( 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam cursus. Morbi ut mi. Nullam enim leo, egestas id, condimentum at, laoreet mattis, massa.' );
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Flyweight - DOM - Centralized event handling</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+	    <style type="text/css">
+	    	.info {
+	    		display: none;
+	    	}
+	    </style>
+
+		<div id="container">
+			<div class="toggle" href="#"> More Info (Address)
+				<span class="info">
+					This is more information
+				</span>
+			</div>
+			<div class="toggle" href="#"> Even More Info
+				<span class="info">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
+				</span>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="./assets/jquery.min.js"></script>
+        <script>
+
+			var stateManager = {
+				fly: function () {
+					var self = this;
+
+					$( '#container' )
+						.unbind()
+						.on( "click", "div.toggle", function( e ) {
+							self.handleClick( e.target );
+						});
+				},
+
+				handleClick: function ( elem ) {
+					$( elem ).find( "span" ).toggle( "slow" ); // Found a typo here
+					// Missing the $( elem ).find // Original was elem.find
+				}
+			};
+
+			// Run
+			stateManager.fly();
+
+        </script>
+    </body>
+</html>

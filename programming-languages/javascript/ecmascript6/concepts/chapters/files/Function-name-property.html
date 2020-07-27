@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Function name property</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          function doSomething() {
+            // ...
+          }
+
+          var doAnotherThing = function() {
+            // ...
+          };
+
+          console.log(doSomething.name);          // "doSomething"
+
+          // In ECMA Script 5, this return ""
+          console.log(doAnotherThing.name);       // "doAnotherThing"
+
+        </script>
+    </body>
+</html>

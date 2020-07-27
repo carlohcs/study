@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Template literals - String.raw</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+            let message1 = `Multiline\nstring`,
+                message2 = String.raw`Multiline\nstring`;
+
+            console.log(message1);          // "Multiline
+                                            //  string"
+
+            console.log("--------------------");
+
+            console.log(message2);          // "Multiline\nstring"
+
+            console.log("--------------------");
+
+            function testStringRaw( stringRaw ) {
+              console.log( stringRaw );
+              console.log( stringRaw.raw[0] );
+            }
+
+            testStringRaw `Lorem ipsum`;
+
+            console.log("--------------------");
+
+            testStringRaw( `Lorem ipsum` );
+
+            //testStringRaw.call( null, 'Lorem ipsum' );
+
+            /*function sum( a, b ) {
+              console.log( a + b );
+            }*/
+
+            //sum.call( null, 1, 2 );
+            //sum.call( this, 1, 2 );
+
+        </script>
+    </body>
+</html>

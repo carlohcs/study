@@ -1,0 +1,89 @@
+<section>
+    <article>
+        <h3>Input/Output Properties</h3>
+        <course name="Lorem Ipsum" anotherName="John doe" bar="Mary Doe">
+        </course>
+    </article>
+</section>
+
+<section>
+    <h3>Two-way data binding</h3>
+    <input type="text" [value]="name" (input)="name = $event.target.value">
+    <input type="text" [ngModel]="name" (ngModelChange)="name = $event" />
+    <input type="text" [(ngModel)]="name" />
+    <!-- Conceito banana in a box -->
+    <input type="text" bindon-ngModel="name" />
+    <p>Você digitou: {{ name }}</p>
+    <hr />
+
+    <section>
+        Meu nome é {{ person.name }} e tenho {{ person.age }} anos de idade
+        <input type="text" [(ngModel)]="person.name" />
+        <input type="text" [(ngModel)]="person.age" />
+    </section>
+</section>
+
+<hr />
+
+<section class="property-binding">
+    <artitle>
+        <p>String renderizada com interpolation. URL -> {{ url }}</p>
+        <p> Outro tipo de expressão: {{ 1 + 1 }}</p>
+        <p> Outro tipo de expressão: {{ 1 + 1 + getValor() }}</p>
+    </artitle>
+
+    <article>
+        <img src="{{ urlImage }}" />
+        <!-- A interpolação é mais recomendado em casos onde não se tenha a opção de propriedade,
+        como na tag "p", não existe a propriedade "textContent" -->
+        <img [src]="urlImage" />
+        <!-- Maneira mais comum -->
+        <img bind-src="urlImage" />
+        <!-- O Angular sempre faz isso -->
+    </article>
+
+    <article>
+        <br />
+        <select #classe (change)="0">
+            <option value="alert-success">Sucesso</option>
+            <option value="alert-info">Info</option>
+            <option value="alert-warning">Warning</option>
+            <option value="alert-danger">Error</option>
+        </select>
+        <br />
+        <p>Aplica o valor ao elemento diretamente</p>
+        <div class="alert {{ classe.value }}" role="alert">
+            Valor inicial
+        </div>
+        <p>Aplica valor só ao elemento selecionado</p>
+        <br />
+        <div class="alert" role="alert" [class.alert-success]="classe.value == 'alert-success'">Sucess</div>
+        <div class="alert" role="alert" [class.alert-info]="classe.value == 'alert-info'">Info</div>
+        <div class="alert" role="alert" [class.alert-warning]="classe.value == 'alert-warning'">Warning</div>
+        <div class="alert" role="alert" [class.alert-danger]="classe.value == 'alert-danger'">Error</div>
+
+        <br />
+        <p>Operadores ternários</p>
+        <div class="alert alert-danger" role="alert" style="display:none;" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
+            Esse texto somente aparece em caso de erro
+        </div>
+    </article>
+    <br />
+    <p>Evento de clique</p>
+    <section>
+        <button (click)="infoAlert()">Me clique!</button>
+    </section>
+    <br />
+    <p>Evento de change</p>
+    <section>
+        <p>Conteúdo atual: {{ content }}</p>
+        <p>Conteúdo salvo: {{ contentSaved }}</p>
+        <input type="text" (keyup)="keyUpValue($event)" (keyup.enter)="saveData($event.target.value)" (blur)="saveData(field.value)" #field />
+    </section>
+    <br />
+    <p>Esculta de eventos</p>
+    <section>
+        <span (mouseover)="onMouseSpan()" (mouseout)="onMouseSpan()" [class.highlight]="isMouseOver">Passe o mouse!
+        </span>
+    </section>
+</section>

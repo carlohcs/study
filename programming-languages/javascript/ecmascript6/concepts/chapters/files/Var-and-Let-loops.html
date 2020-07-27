@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Var and Let in loops</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          function process( number ) {}
+          var items = [0,1,2,3,4,5,6,7,8,9];
+
+          // var
+          for (var i=0; i < 10; i++) {
+              process(items[i]);
+          }
+
+          // i is still accessible here
+          console.log(i);
+
+          // let
+          for (let ii=0; ii < 10; ii++) {
+              process(items[ii]);
+          }
+
+          // ii is not accessible here - throws an error
+          console.log(ii);
+
+
+        </script>
+    </body>
+</html>

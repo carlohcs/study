@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Flyweight - Normal</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+        	// Normal way
+        	
+        	// Definition
+        	var Book = function ( id, title, author, genre, pageCount, publisherID, ISBN, checkoutDate, checkoutMember, dueReturnDate, availability ) {
+
+				this.id = id;
+				this.title = title;
+				this.author = author;
+				this.genre = genre;
+				this.pageCount = pageCount;
+				this.publisherID = publisherID;
+				this.ISBN = ISBN;
+				this.checkoutDate = checkoutDate;
+				this.checkoutMember = checkoutMember;
+				this.dueReturnDate = dueReturnDate;
+				this.availability = availability;
+				
+			};
+
+			Book.prototype = {
+				
+				getTitle: function () {
+					return this.title;
+				},
+
+				getAuthor: function () {
+					return this.author;
+				},
+
+				getISBN: function () {
+					return this.ISBN;
+				},
+
+				updateCheckoutStatus: function ( id, checkoutDate, checkoutMember, availability ) {
+
+					this.id = id;
+					this.checkoutDate = checkoutDate;
+					this.checkoutMember = checkoutMember;
+					this.availability = availability;
+
+				},
+
+				extendCheckoutPeriod: function ( bookID, newReturnDate ) {
+
+					this.id = bookID;
+					this.dueReturnDate = newReturnDate;
+
+				},
+
+				isPastDue: function ( bookID ) {
+
+					var currentDate = new Date();
+					return currentDate.getTime() > Date.parse( this.dueReturnDate );
+
+				}
+
+			};
+
+			
+			var book = [];
+
+			//var t0 = performance.now();
+
+			function normalWay() {
+				for ( var i = 0; i < 10000; i++ ) {
+					
+					book[i] = new Book(i, "Title" + i , "author" + i, "genre" + i, "pageCount" + i, "publisherID" + i, "ISBN" + i, "checkoutDate" + i, "checkoutMember" + i, "dueReturnDate" + i, "availability" + i);
+
+				}
+			}
+
+			//console.profile('Normal way');
+			normalWay();
+			//console.log(console.memory);
+			//console.profileEnd();
+
+			//var t1 = performance.now();
+
+			//console.log( "Normal way: ", (t1 - t0).toFixed(4) );
+            
+        </script>
+    </body>
+</html>

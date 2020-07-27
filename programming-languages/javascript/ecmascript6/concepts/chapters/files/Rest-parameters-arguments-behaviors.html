@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Rest parameters arguments behaviors</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          function checkArgs(...args) {
+            console.log(args.length);
+            console.log(arguments.length);
+            console.log(args[0], arguments[0]);
+            console.log(args[1], arguments[1]);
+          }
+
+          checkArgs("a", "b");
+
+        </script>
+    </body>
+</html>

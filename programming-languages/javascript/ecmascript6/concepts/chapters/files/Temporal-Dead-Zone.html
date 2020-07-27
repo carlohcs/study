@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Temporal Dead Zone</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          if ("condition") {
+              console.log(typeof value);  // ReferenceError!
+              let value = "blue";
+          }
+
+        </script>
+    </body>
+</html>

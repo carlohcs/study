@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Notification jQuery example</title>
+  <meta charset="utf-8" />
+  <style>
+    .container {
+      width: 200px;
+      height: auto;
+      position: fixed;
+      right: 50px;
+      top: 10px;
+    }
+
+    .container > .notifications {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .notifications > .item {
+      margin-bottom: 10px;
+      padding: 20px;
+      heigh: 60px;
+      width: 100%;
+      display: none;
+    }
+
+    .item.loading {
+      background: #777;
+      color: #fff;
+    }
+
+    .item.success {
+      background: green;
+      color: #fff;
+    }
+
+    .item.error {
+      background: red;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Examplo com Promise do jQuery</h1>
+
+  <div class="container">
+    <ul class="notifications">
+      <li class="item loading">
+        Carregando...
+      </li>
+      <li class="item success">
+        Sucesso!
+      </li>
+      <li class="item error">
+        Erro!
+      </li>
+    </ul>
+  </div>
+
+  <!-- Dependencies -->
+  <script src="./src/bower_components/jquery/dist/jquery.min.js"></script>
+
+  <script>
+    (function(){
+      var
+        NotificationService = (function(){
+          return {
+              message: function(promise, init, then, fail) {
+
+                if(promise.state() === 'pending') {
+                  init();
+                }
+
+                promise
+                  .then(then, fail);
+              },
+              fakePromise: function() {
+                var
+                  successOrError = function() {
+                    return parseInt(Math.random() * Math.random() * 1000) % 2 === 0;
+                  },
+                  defer = $.Deferred();
+
+                window.setTimeout(function(){
+                  if(successOrError()) {
+                    defer.resolve('Sucesso!');
+                  }
+                  else {
+                    defer.reject('Erro!');
+                  }
+                }, 1000);
+
+                return defer.promise();
+              }
+          };
+        })(),
+        promise = NotificationService.fakePromise(),
+        init = function() {
+          $('.item').hide();
+          $('.loading').slideDown();
+        },
+        then = function(value) {
+          $('.item').hide();
+          $('.success').slideDown();
+          console.log('Then value-> ', value);
+        },
+        fail = function(value) {
+          $('.item').hide();
+          $('.error').slideDown();
+          console.log('Fail value -> ', value);
+        };
+
+        promise
+          .then(function(success){
+            $('body').append(success, ' foi definido.<br / >');
+          }, function(error){
+            $('body').append(error, ' foi definido.<br / >');
+          });
+
+        NotificationService.message(promise, init, then, fail);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Command Pattern</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+
+		<h1>See working in console</h1>
+
+		<script>
+
+			(function() {
+	
+				var carManager = {
+
+					// request information
+					requestInfo: function( model, id ) {
+						return "The information for " + model + " with ID " + id + " is";
+					},
+
+					// purchase the car
+					buyVehicle: function( model, id ) {
+						return "You have successfully booked purchased item " + id  + ", a " + model;
+					},
+
+					// arrange a viewing
+					arrangeViewing: function( model, id ) {
+						return "You have successfully booked a viewing of " + model;
+					}
+
+				};
+
+				carManager.execute = function (name) {
+					return carManager[ name ] && carManager[ name ].apply( carManager, [].splice.call( arguments, 1 ) );	
+				};
+
+				console.log(carManager.execute( "arrangeViewing", "Ferrari", "14523" ));
+				console.log(carManager.execute( "requestInfo", "Ferrari", "34232" ));
+				console.log(carManager.execute( "buyVehicle", "Ford Escort", "34232" ));
+
+			})();
+
+		</script>
+	</body>
+</html>

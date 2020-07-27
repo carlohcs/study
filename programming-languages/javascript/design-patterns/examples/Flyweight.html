@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Flyweight Pattern</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <script>
+
+        	// Normal way
+        	
+        	// Definition
+        	var Book = function ( id, title, author, genre, pageCount, publisherID, ISBN, checkoutDate, checkoutMember, dueReturnDate, availability ) {
+
+				this.id = id;
+				this.title = title;
+				this.author = author;
+				this.genre = genre;
+				this.pageCount = pageCount;
+				this.publisherID = publisherID;
+				this.ISBN = ISBN;
+				this.checkoutDate = checkoutDate;
+				this.checkoutMember = checkoutMember;
+				this.dueReturnDate = dueReturnDate;
+				this.availability = availability;
+				
+			};
+
+			Book.prototype = {
+				
+				getTitle: function () {
+					return this.title;
+				},
+
+				getAuthor: function () {
+					return this.author;
+				},
+
+				getISBN: function () {
+					return this.ISBN;
+				},
+
+				updateCheckoutStatus: function ( id, checkoutDate, checkoutMember, availability ) {
+
+					this.id = id;
+					this.checkoutDate = checkoutDate;
+					this.checkoutMember = checkoutMember;
+					this.availability = availability;
+
+				},
+
+				extendCheckoutPeriod: function ( bookID, newReturnDate ) {
+
+					this.id = bookID;
+					this.dueReturnDate = newReturnDate;
+
+				},
+
+				isPastDue: function ( bookID ) {
+
+					var currentDate = new Date();
+					return currentDate.getTime() > Date.parse( this.dueReturnDate );
+
+				}
+
+			};
+
+			
+			var book;
+
+			//var t0 = performance.now();
+
+			function normalWay() {
+				for ( var i = 0; i < 10000; i++ ) {
+					
+					book = new Book(i, "Title" + i , "author" + i, "genre" + i, "pageCount" + i, "publisherID" + i, "ISBN" + i, "checkoutDate" + i, "checkoutMember" + i, "dueReturnDate" + i, "availability" + i);
+
+				}
+			}
+
+			console.profile('Normal way');
+			normalWay();
+			//console.log(console.memory);
+			//console.profileEnd();
+
+			//var t1 = performance.now();
+
+			//console.log( "Normal way: ", (t1 - t0).toFixed(4) );
+            
+
+            // Flyweight optimized version
+			var Book = function ( title, author, genre, pageCount, publisherID, ISBN ) {
+
+				this.title = title;
+				this.author = author;
+				this.genre = genre;
+				this.pageCount = pageCount;
+				this.publisherID = publisherID;
+				this.ISBN = ISBN;
+
+			};
+
+			// Book Factory singleton
+			var BookFactory = (function () {
+				var existingBooks = {}, existingBook;
+
+				return {
+					createBook: function ( title, author, genre, pageCount, publisherID, ISBN ) {
+
+						 // Find out if a particular book meta-data combination has been created before
+      					// !! or (bang bang) forces a boolean to be returned
+						existingBook = existingBooks[ ISBN ];
+
+						if ( !!existingBook ) {
+							return existingBook;
+						} else {
+
+							// if not, let's create a new instance of the book and store it
+							var book = new Book( title, author, genre, pageCount, publisherID, ISBN );
+							existingBooks[ ISBN ] = book;
+							return book;
+
+						}
+
+					}
+				};
+
+			})();
+
+			var BookRecordManager = (function () {
+		
+				var bookRecordDatabase = {};
+
+				return {
+					// add a new book into the library system
+					addBookRecord: function ( id, title, author, genre, pageCount, publisherID, ISBN, checkoutDate, checkoutMember, dueReturnDate, availability ) {
+						
+						var book = BookFactory.createBook( title, author, genre, pageCount, publisherID, ISBN );
+
+						bookRecordDatabase[ id ] = {
+							checkoutMember: checkoutMember,
+							checkoutDate: checkoutDate,
+							dueReturnDate: dueReturnDate,
+							availability: availability,
+							book: book
+						};
+
+					},
+					updateCheckoutStatus: function ( ) {
+
+						var record = bookRecordDatabase[ bookId ];
+						record.checkoutMember = checkoutMember;
+						record.checkoutDate = checkoutDate;
+						record.dueReturnDate = dueReturnDate;
+						record.availability = availability;
+
+					},
+
+					extendCheckoutPeriod: function ( bookId, newReturnDate ) {
+						var currentDate = new Date();
+						return currentDate.getTime() >  Date.parse( bookRecordDatabase[ bookID ].dueReturnDate );
+					}
+				};
+
+			})();
+
+			book = null;
+
+			//var t2 = performance.now();
+
+			function flyWeightWay(){
+				for ( var i = 0; i < 10000; i++ ) {
+				
+					book = BookRecordManager.addBookRecord(i, "Title" + i , "author" + i, "genre" + i, "pageCount" + i, "publisherID" + i, "ISBN" + i, "checkoutDate" + i, "checkoutMember" + i, "dueReturnDate" + i, "availability" + i);
+
+				}
+			}
+
+			console.profile('Flyweight way');
+			flyWeightWay();
+			//console.log(console.memory);
+			//console.profileEnd();
+
+			//var t3 = performance.now();
+
+			//console.log( "Flyweight pattern: ", (t3 - t2).toFixed(4) );
+
+        </script>
+    </body>
+</html>

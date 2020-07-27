@@ -1,0 +1,36 @@
+<!doctype html>
+<html language="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Title</title>
+</head>
+<body>
+
+  <script src="../examples/assets/underscore.min.js"></script>
+  <script src="../examples/assets/jquery.min.js"></script>
+  <script src="../examples/assets/backbone.min.js"></script>
+
+  <script>
+    var Person = new Backbone.Model({
+      name: 'Jeremy'
+    });
+
+    // Validate the model name
+    Person.validate = function(attrs) {
+      if(!attrs.name) {
+        return 'I need your name';
+      }
+    };
+
+    // Change the name
+    Person.set({name: 'Samuel'});
+    // Outputs: 'Samuel'
+    console.log(Person.get('name'));
+
+    // Remove the name atrribute, force validation
+    Person.unset('name', {validate: true});
+    // false
+  </script>
+
+</body>
+</html>

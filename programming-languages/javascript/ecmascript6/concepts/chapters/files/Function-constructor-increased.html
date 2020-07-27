@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Function constructor increased</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+
+        <h1>See working in console</h1>
+
+        <!-- Necessary to run ECS6 -->
+        <script src="assets/browser.min.js"></script>
+
+        <script type="text/babel">
+
+          // The use of "second = first" doesn't are accepeted
+          var add = new Function("first", "second",
+                  "return first + second");
+
+          console.log(add(1, 1));     // 2
+          console.log(add(1));
+
+          console.log("------------");
+
+          var pickFirst = new Function("...args", "return args[0]");
+
+          console.log(pickFirst(1, 2));   // 1
+
+        </script>
+    </body>
+</html>
