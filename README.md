@@ -10,6 +10,7 @@ Studies about programming, tecnology and career.
 	* [Git](./development-tools/git/)
 * **[Events](./events/)**
 * **Languages**
+	* [Python](./languages/python/)
 	* [English](./languages/english/)
 * **[Productivity and Life Balance](./productivity-and-life-balance/)**
 * **Programming language**
