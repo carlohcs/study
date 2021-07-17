@@ -6,6 +6,7 @@
 * [Components](./components/)
 * [Design Patterns](./design-patterns/)
 * [ECMAScript 6](./ecmascript6/)
+* [Canvas](./canvas/)
 
 ### Another links and useful items
 
