@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: system-configmap
+data:
+  HOST_DB: "svc-db-system:3306"
+  USER_DB: "root"
+  PASS_DB: "123456789"
+  DATABASE_DB: "empresa"

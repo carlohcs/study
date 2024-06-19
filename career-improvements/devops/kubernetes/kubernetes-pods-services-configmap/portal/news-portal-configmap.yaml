@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: news-portal-configmap
+data:
+  # On windows/mac:
+  # http://localhost:30001
+  # On Linux (it uses internal IP):
+  # kubectl get nodes -o wide
+  # http://10.1.0.37:30001
+  IP_SISTEMA: http://localhost:30001

@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-system
+  labels:
+    app: db-system
+spec:
+  containers:
+    - name: db-system-container
+      image: aluracursos/mysql-db:1
+      ports:
+        - containerPort: 3306
+      # Unsecure way
+      # env:
+      #   - name: "MYSQL_ROOT_PASSWORD"
+      #     value: "123456789"
+      #   - name: "MYSQL_DATABASE"
+      #     value: "empresa"
+      #   - name: "MYSQL_PASSWORD"
+      #     value: "123456789"
+
+
+      # Secure way - complex
+      # env:
+      #   - name: MYSQL_ROOT_PASSWORD
+      #     valueFrom:
+      #       configMapKeyRef:
+      #         name: db-configmap
+      #         key: MYSQL_ROOT_PASSWORD
+      #   - name: MYSQL_DATABASE
+      #     valueFrom:
+      #       configMapKeyRef:
+      #         name: db-configmap
+      #         key: MYSQL_DATABASE
+      #   - name: MYSQL_PASSWORD
+      #     valueFrom:
+      #       configMapKeyRef:
+      #         name: db-configmap
+      #         key: MYSQL_PASSWORD
+
+      # Secure way - easier
+      envFrom:
+        - configMapRef:
+            name: db-configmap
