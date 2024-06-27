@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  template:
+    metadata:
+      name: nginx-pod
+      labels: 
+        app: nginx-pod
+    spec:
+      containers:
+        - name: nginx-container
+          # image: nginx:stable
+          image: nginx:latest
+          # image: nginx:1
+          ports:
+            - containerPort: 80
+  replicas: 3
+  # Kubernetes doesn't know which template it should follow
+  # Even being in the same file like we have here
+  # so we need to define the selector as well
+  # to have the same name as defined before
+  # eg.: nginx (label defined on top)
+  selector:
+    matchLabels:
+      app: nginx-pod

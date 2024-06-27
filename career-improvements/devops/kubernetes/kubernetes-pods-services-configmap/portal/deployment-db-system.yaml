@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-system-deployment
+spec:
+  template:
+    metadata:
+      name: db-system
+      labels:
+        app: db-system
+    spec:
+      containers:
+      - name: db-system-container
+        image: aluracursos/mysql-db:1
+        ports:
+          - containerPort: 3306
+        envFrom:
+          - configMapRef:
+              name: db-configmap
+  selector:
+    matchLabels:
+      app: db-system
