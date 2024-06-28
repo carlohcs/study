@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-pod-volume
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      volumeMounts:
+        - mountPath: /volume-inside-of-container
+          name: first-volume
+    - name: jenkins-container
+      image: jenkins:2.60.1-alpine
+      volumeMounts:
+        - mountPath: /volume-inside-of-container
+          name: first-volume
+  volumes:
+    - name: first-volume
+      hostPath:
+        # We need to activate the file sharing at the Docker
+          # Settings / Resources / File Sharing
+        # Windows
+        # path: /C/Users/Carlos/repository/study/career-improvements/devops/kubernetes/kubernetes-pods-services-configmap/portal/volume
+        path: /Users/carlohcs/Documents/repository/study/career-improvements/devops/kubernetes/kubernetes-pods-services-configmap/portal/volume
+        type: Directory
