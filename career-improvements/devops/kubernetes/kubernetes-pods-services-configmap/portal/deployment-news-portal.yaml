@@ -48,6 +48,10 @@ spec:
             failureThreshold: 5
             # Wait for the initial container running
             initialDelaySeconds: 3
+          # Needed to do the autoscaling
+          resources:
+            requests:
+              cpu: 10m
   replicas: 3
   # Kubernetes doesn't know which template it should follow
   # Even being in the same file like we have here
