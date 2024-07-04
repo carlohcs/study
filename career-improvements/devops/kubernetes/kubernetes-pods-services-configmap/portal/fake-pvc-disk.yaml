@@ -8,4 +8,6 @@ spec:
   resources:
     requests:
       storage: 10Gi
+  # storageClassName: local-storage / when we need to map our local file inside at the container (for development)
+  # storageClassName: local-storage-db / when we need to map a database
   storageClassName: standard
