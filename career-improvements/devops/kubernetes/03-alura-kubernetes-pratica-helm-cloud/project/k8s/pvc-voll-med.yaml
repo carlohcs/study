@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mysql-vollmed
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # 1 - We want to use the default Storage Class
+  # So we don't need to define it here
+  # storageClassName: --
+  # 2 - Once it's created, the default reclaim policy is set as 'Delete'
+  # Since we cannot set it here: persistentVolumeReclaimPolicy: Retain
+  # we need to do it at the command line:
+  # kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+
+  

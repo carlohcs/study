@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-vollmed
+data:
+  DB_HOST: svc-mysql-vollmed
+  DB_DATABASE: testemed

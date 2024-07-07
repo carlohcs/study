@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-vollmed
+  labels:
+    app: deployment-vollmed
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deployment-vollmed
+  template:
+    metadata:
+      labels:
+        app: deployment-vollmed
+    spec:
+      containers:
+      - name: vollmed-api-container
+        image: leonardosartorello/vollmed:v8
+        # It was giving: "OOMKilled"
+        # Explanation:
+        # https://stackoverflow.com/a/69195155/3929980
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+          - containerPort: 3000
+        # Load all non sensitive data
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: config-map-vollmed
+                key: DB_HOST
+          - name: DB_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: config-map-vollmed
+                key: DB_DATABASE
+          # Load sensitive data
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secret-vollmed
+                key: DB_PASSWORD
+

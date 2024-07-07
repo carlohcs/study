@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: svc-mysql-vollmed
+spec:
+  selector:
+    matchLabels:
+      app: svc-mysql-vollmed # has to match .spec.template.metadata.labels
+  serviceName: "svc-mysql-vollmed"
+  replicas: 1
+  minReadySeconds: 10 # by default is 0 (time to wait before hit the service)
+  template:
+    metadata:
+      labels:
+        app: svc-mysql-vollmed
+    spec:
+      terminationGracePeriodSeconds: 10 # Kubernetes it will block requests, wait for db and close the service
+      containers:
+        - name: vollmed-mysql-container
+          image: mysql:8
+          ports:
+          - containerPort: 3306
+            # name: svc-mysql-vollmed
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-vollmed
+                  key: DB_DATABASE
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-vollmed
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: mysql-volume-disk
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-volume-disk
+          persistentVolumeClaim:
+            claimName: pvc-mysql-vollmed
