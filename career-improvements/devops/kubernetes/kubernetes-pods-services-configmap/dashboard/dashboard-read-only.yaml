@@ -17,6 +17,7 @@ rules:
   - ""
   resources: ["*"]
   verbs:
+  - batch
   - get
   - list
   - watch
@@ -24,6 +25,7 @@ rules:
   - extensions
   resources: ["*"]
   verbs:
+  - batch
   - get
   - list
   - watch
@@ -31,6 +33,7 @@ rules:
   - apps
   resources: ["*"]
   verbs:
+  - batch
   - get
   - list
   - watch

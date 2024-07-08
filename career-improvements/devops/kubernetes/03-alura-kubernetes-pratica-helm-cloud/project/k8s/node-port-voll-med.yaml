@@ -3,6 +3,12 @@ kind: Service
 metadata:
   name: node-port-vollmed
 spec:
+  # About LoadBalancer:
+  # It's not possible to use locally without some tool to create the Load Balancer
+  # https://stackoverflow.com/questions/59760559/kubernetes-default-loadbalancer-for-a-service-run-locally
+  # It's possible to use with minikube or another tool like MetallB:
+  # https://metallb.universe.tf/
+  # type: LoadBalancer
   type: NodePort
   selector:
     app: deployment-vollmed
