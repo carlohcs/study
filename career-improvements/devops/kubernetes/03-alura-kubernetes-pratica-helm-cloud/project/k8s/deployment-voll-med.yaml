@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
       - name: vollmed-api-container
-        image: leonardosartorello/vollmed:v8
+        # Stable version
+        # image: leonardosartorello/vollmed:v8
+        # For this one v, we will need use Helm - the application needs to have Redis
+        image: leonardosartorello/vollmed:v9
         # It was giving: "OOMKilled"
         # Explanation:
         # https://stackoverflow.com/a/69195155/3929980
@@ -38,6 +41,11 @@ spec:
               configMapKeyRef:
                 name: config-map-vollmed
                 key: DB_DATABASE
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: config-map-vollmed
+                key: REDIS_HOST
           # Load sensitive data
           - name: DB_PASSWORD
             valueFrom:
